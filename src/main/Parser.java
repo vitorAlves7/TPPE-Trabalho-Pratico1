@@ -1,6 +1,8 @@
 package main;
 
 import java.io.File;
+import java.io.IOException;
+
 import exception.ArquivoNaoEncontradoException;
 import exception.DelimitadorInvalidoException;
 
@@ -25,7 +27,7 @@ public class Parser {
 
 	public void defineLimitador(String delimitador) throws DelimitadorInvalidoException {
 		if(delimitador.length() != 1) {
-			throw new DelimitadorInvalidoException("O delimitador deve ser um Ãºnico caractere.");
+			throw new DelimitadorInvalidoException("O delimitador deve ser um unico caractere.");
 		}
 		else {
 			this.delimitador = delimitador;
@@ -34,6 +36,14 @@ public class Parser {
 
 	public String getDelimitador() {
 		return ";";
+	}
+	
+	public void abrirArquivoSaida(String path) throws IOException {
+		//Falsificação
+	}
+
+	public File getArquivoSaida() {
+		return new File("output.out"); //Falsificação
 	}
 	
 }
