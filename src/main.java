@@ -1,5 +1,8 @@
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Scanner;
+
+import javax.swing.JOptionPane;
 
 import exception.ArquivoNaoEncontradoException;
 import exception.DelimitadorInvalidoException;
@@ -11,32 +14,22 @@ public class main {
 	public static void main(String[] args) throws ArquivoNaoEncontradoException, IOException, DelimitadorInvalidoException, LinhaOuColunaException {
 		Parser p = new Parser();
 		
+		Scanner scanner = new Scanner(System.in);
+		
+		System.out.println("Informe o delimitador: ");
+		String delimitador = scanner.next();
+		
+		System.out.println("Informe o formato da saída ('l' para linha ou 'c' para coluna): ");
+		String formatoSaida = scanner.next();
+		
 		p.lerArquivo("src/files/analysisTime.out");
-		p.defineLimitador(";");
+		p.defineLimitador(delimitador);
 		
 		String conteudoArquivo = p.readFile(p.getArquivo().getPath(), StandardCharsets.UTF_8);
 		String[] conteudoArquivoArray = conteudoArquivo.split("\\r?\\n");
-//		int i = 0;
-//		System.out.println(conteudoArquivoArray[0]);
-		
-//		char[] arrayConteudoArquivo = conteudoArquivo.toCharArray();
-		
-//		
-//		for(String caracter : conteudoArquivoArray) { 
-//			
-////			System.out.println(String.valueOf(caracter.charAt(0)));
-//			if(String.valueOf("-").equals(new String(new char[]{caracter.charAt(0)}))) {
-////				System.out.println(++i + p.getDelimitador());
-//				if(i != 0)
-//					System.out.println();
-//				caracter = String.valueOf(++i);
-//			}
-//			
-//			System.out.print(caracter);
-//			System.out.print(p.getDelimitador());
-//		}
-//		p.linhaOuColuna("l", conteudoArquivoArray, p.getDelimitador());
-		p.linhaOuColuna("c", conteudoArquivoArray, p.getDelimitador());
+
+		p.linhaOuColuna(formatoSaida, conteudoArquivoArray, p.getDelimitador());
+//		p.linhaOuColuna("c", conteudoArquivoArray, p.getDelimitador());
 
 	}
 
