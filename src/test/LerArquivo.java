@@ -15,12 +15,12 @@ public class LerArquivo {
 	public void start() throws Exception {
 		parser = new Parser();
 	}
-
+ 
 	@Test
 	public void testeAbrirArquivo1() throws ArquivoNaoEncontradoException {
-		String path = "src/files/analysisTime.out";
+		String path = "src/files/analysisTimeTest.out";
 		parser.lerArquivo(path);
-		assertEquals(parser.getArquivo(path).getPath(), path);
+		assertEquals(parser.getArquivo().getPath(), path);
 	}
 
 }
