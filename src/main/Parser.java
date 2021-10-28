@@ -32,7 +32,7 @@ public class Parser {
 
 	public void defineLimitador(String delimitador) throws DelimitadorInvalidoException {
 		if(delimitador.length() != 1) {
-			throw new DelimitadorInvalidoException("O delimitador deve ser um unico caractere.");
+			throw new DelimitadorInvalidoException("O delimitador deve ser um único caractere.");
 		}
 		else {
 			this.delimitador = delimitador;
@@ -56,46 +56,32 @@ public class Parser {
 	  return new String(encoded, encoding);
 	}
 	
-	public void linhaOuColuna(String escolha, String[] dadosArquivo, String delimitador) throws LinhaOuColunaException, IOException {
-		if (escolha.equals("l") || escolha.equals("L") || escolha.equals("c") || escolha.equals("C")) {
-			if (escolha.equals("l") || escolha.equals("L")) {
-				apresentarPorLinha(dadosArquivo, delimitador);
-				
-			} else if (escolha.equals("c") || escolha.equals("C")) {
-				apresentarPorColuna(dadosArquivo, delimitador);
-			}
+	public boolean verificaFormatoSaida(String formatoSaida) throws LinhaOuColunaException{
+		if (formatoSaida.equals("l") || formatoSaida.equals("L") || formatoSaida.equals("c") || formatoSaida.equals("C")) {
+			return true;
 		} else {
 			throw new LinhaOuColunaException("Escolha um caracter válido.");
 		}
 	}
 	
-	private void apresentarPorLinha(String[] dadosArquivo, String delimitador) throws IOException {
-		FileWriter myWriter = new FileWriter("filename.txt");
-		
-		int i = 0;
-		
+	public void escreverNoArquivo(String formatoSaida, String[] dadosArquivo, String delimitador) throws LinhaOuColunaException, IOException {
 		try {
-			for(String caracter : dadosArquivo) { 
-				if(String.valueOf("-").equals(new String(new char[]{caracter.charAt(0)}))) {
-					if(i != 0)
-						myWriter.write("\n");
-					caracter = String.valueOf(++i);
-				}
+			verificaFormatoSaida(formatoSaida);
+			
+			if (formatoSaida.equals("l") || formatoSaida.equals("L")) {
+//				apresentarPorLinha(dadosArquivo, delimitador);
 				
-				myWriter.write(caracter);
-				myWriter.write(delimitador);
+			} else if (formatoSaida.equals("c") || formatoSaida.equals("C")) {
+//				apresentarPorColuna(dadosArquivo, delimitador);
 			}
-			myWriter.close();
-			System.out.println("Arquivo escrito com sucesso");
-		} catch (IOException e) {
-	      System.out.println("Um erro ocorreu.");
-	      e.printStackTrace();
-	    }
+		} catch (Error e) {
+			System.out.println(e.getMessage());
+		}
+		
 		
 	}
 	
-	private void apresentarPorColuna(String[] dadosArquivo, String delimitador) throws IOException {
-		FileWriter myWriter = new FileWriter("filename.txt");
-	}
+	
+
 	
 }
