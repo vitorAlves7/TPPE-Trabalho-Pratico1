@@ -2,6 +2,7 @@ package test;
 
 import static org.junit.Assert.*;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import exception.LinhaOuColunaException;
@@ -11,12 +12,16 @@ public class FormatoTest {
 
 	Parser parser;
 	
+	@Before
+    public void setUp() throws Exception {
+        this.parser = new Parser();
+    }
+	
 	@Test
-	public void test() throws LinhaOuColunaException{
-		String linhaColuna = "a";
-		String[] mock;
+	public void retornaTruePassandoCaracterLouC() throws LinhaOuColunaException{
+		String formatoSaida = "l";
 		
-//		assertEquals(new Object(), parser.linhaOuColuna(linhaColuna, mock, ""));
+		assertEquals(parser.verificaFormatoSaida(formatoSaida), true); 
 	}
-
+	
 }
