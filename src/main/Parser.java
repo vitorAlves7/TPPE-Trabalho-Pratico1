@@ -11,6 +11,8 @@ import exception.ArquivoNaoEncontradoException;
 import exception.DelimitadorInvalidoException;
 import exception.LinhaOuColunaException;
 
+
+
 public class Parser {
 
 	private File file;
@@ -69,10 +71,9 @@ public class Parser {
 			verificaFormatoSaida(formatoSaida);
 			
 			if (formatoSaida.equals("l") || formatoSaida.equals("L")) {
-//				apresentarPorLinha(dadosArquivo, delimitador);
-				
+				apresentarPorLinha(dadosArquivo, delimitador);
 			} else if (formatoSaida.equals("c") || formatoSaida.equals("C")) {
-//				apresentarPorColuna(dadosArquivo, delimitador);
+				apresentarPorColuna(dadosArquivo, delimitador);
 			}
 		} catch (Error e) {
 			System.out.println(e.getMessage());
@@ -81,7 +82,34 @@ public class Parser {
 		
 	}
 	
-	
+	private void apresentarPorLinha(String[] dadosArquivo, String delimitador) throws IOException {			
+		FileWriter myWriter = new FileWriter("filename");
 
+		int i = 0;
+		
+		try {
+			for(String caracter : dadosArquivo) { 
+				if(String.valueOf("-").equals(new String(new char[]{caracter.charAt(0)}))) {
+					if(i != 0)
+						myWriter.write("\n");
+					caracter = String.valueOf(++i);
+				}
+				
+				myWriter.write(caracter);
+				myWriter.write(delimitador);
+			}
+			myWriter.close();
+			System.out.println("Arquivo escrito com sucesso");
+		} catch (IOException e) {
+	      System.out.println("Um erro ocorreu.");
+	      e.printStackTrace();
+	    }
+		
+	}
+	
+	private void apresentarPorColuna(String[] dadosArquivo, String delimitador) throws IOException {
+//		FileWriter myWriter = new FileWriter("filename.txt");
+		System.out.println(file.getName());
+	}
 	
 }
